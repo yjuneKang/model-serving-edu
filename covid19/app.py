@@ -235,8 +235,8 @@ def query():
 
             # detection covid
             try:
-                # prediction, prob, img_pred_name = test_rx_image_for_Covid19(covid_pneumo_model, img_path, filename)
-                # prediction, prob, img_pred_name = covid_classifier_model2(img_path, filename)
+                #prediction, prob, img_pred_name = test_rx_image_for_Covid19(covid_pneumo_model, img_path, filename)
+                #prediction, prob, img_pred_name = covid_classifier_model2(img_path, filename)
                 prediction, prob, img_pred_name = generate_gradcam_heatmap(covid_pneumo_model, img_path, filename)
                 output_path = os.path.join(app.config['OUTPUT_FOLDER'], img_pred_name)
                 return render_template('index.html', prediction=prediction, confidence=prob, filename=image_name, xray_image=img_path, xray_image_with_heatmap=output_path)
@@ -348,7 +348,7 @@ def covid_classifier_model2_heatmap():
 
     #MODEL2_API_URL is tensorflow serving URL in another docker
     HEADERS = {'content-type': 'application/json'}
-    MODEL2_API_URL = 'http://127.0.0.1:8511/v1/models/covid19/versions/1:predict'
+    MODEL2_API_URL = 'http://34.122.229.239:8511/v1/models/covid19/versions/1:predict'
     CLASS_NAMES = ['Covid19', 'Normal_Lung', 'Pneumonia_Bacterial_Lung']
 
     json_response = requests.post(MODEL2_API_URL, data=data, headers=HEADERS)
